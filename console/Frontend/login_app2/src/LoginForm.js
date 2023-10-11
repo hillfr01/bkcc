@@ -5,12 +5,9 @@ const LoginForm = (props) => {
 	const handleSubmit = (event) =>{
 		event.preventDefault();
 
-		//can use plain old js to get form fields and the values
-		//document.forms[0][""]  or something
-
-		const u = "admin";
-		const p = "P@ssw0rd";
-
+		const u = document.forms[0]["name"].value;
+		const p = document.forms[0]["password"].value;
+				
 		props.onSubmit({
 			username: u,
 			password: p
