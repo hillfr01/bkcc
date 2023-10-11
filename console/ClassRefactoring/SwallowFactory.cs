@@ -14,7 +14,7 @@ namespace DeveloperSample.ClassRefactoring
             {
                 case SwallowType.African: return new SwallowAfrican();
                 case SwallowType.European: return new SwallowEuropean();
-                default: throw new ArgumentException($"Could not create swallow of type {swallowType}");
+                default: throw new ArgumentException($"Could not create swallow of type {swallowType}");  //can't happen with enum but add default anyway 
             } 
         }
     }
