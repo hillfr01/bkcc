@@ -8,7 +8,8 @@ namespace DeveloperSample.Algorithms
         [Fact]
         public void CanGetFactorial()
         {
-            Assert.Throws<ArgumentException>(() => Algorithms.GetFactorial(0));
+            Assert.Throws<ArgumentException>(() => Algorithms.GetFactorial(-1));
+            Assert.Equal(1, Algorithms.GetFactorial(0));
             Assert.Equal(1, Algorithms.GetFactorial(1));
             Assert.Equal(2, Algorithms.GetFactorial(2));
             Assert.Equal(6, Algorithms.GetFactorial(3));

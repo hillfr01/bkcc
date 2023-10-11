@@ -29,21 +29,21 @@ namespace DeveloperSample.Syncing
             {
                 tasks.Add(Task.Run(() => bag.Add(i))); //run the tasks
             }
-            Task.WaitAll(tasks.ToArray()); //after all tasks have completed return
+            Task.WaitAll(tasks.ToArray()); //after all tasks have completed return, this was not being done in the original code
             var list = bag.ToList();
             return list;
         }
 
         ConcurrentQueue<int> itemsToInitialize = new ConcurrentQueue<int>(Enumerable.Range(1, 100));
         public Dictionary<int, string> InitializeDictionary(Func<int, string> getItem)
-        {            
+        {
+            itemsToInitialize = new ConcurrentQueue<int>(Enumerable.Range(1, 100));
             var concurrentDictionary = new ConcurrentDictionary<int, string>();
             var threads = Enumerable.Range(0, 3)
                 .Select(i => new Thread(new ThreadStart(() =>
                 {
-                    while (itemsToInitialize.Count > 0)
-                    {
-                        itemsToInitialize.TryDequeue(out var item);
+                    while (itemsToInitialize.TryDequeue(out var item))
+                    {                        
                         {
                             concurrentDictionary.AddOrUpdate(item, getItem, (_, s) => s);
                         }

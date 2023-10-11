@@ -16,7 +16,7 @@ namespace DeveloperSample.ClassRefactoring
                 default: expected = 22; break;
             }
 
-            var swallow = SwallowFactory.CreateSwallowAfrican();
+            var swallow = SwallowFactory.CreateSwallow(SwallowType.African);
             swallow.ApplyLoad(load);
             Assert.Equal(expected, swallow.GetAirspeedVelocity());
         }
@@ -33,7 +33,7 @@ namespace DeveloperSample.ClassRefactoring
                 default: expected = 20; break;
             }
 
-            var swallow = SwallowFactory.CreateSwallowEuropean();
+            var swallow = SwallowFactory.CreateSwallow(SwallowType.European);
             swallow.ApplyLoad(load);
             Assert.Equal(expected, swallow.GetAirspeedVelocity());
         }

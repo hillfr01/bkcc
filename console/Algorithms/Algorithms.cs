@@ -9,10 +9,12 @@ namespace DeveloperSample.Algorithms
     {
         public static int GetFactorial(int input)
         {
-            if (input < 1)
+            if (input < 0)
             {
-                throw new ArgumentException("Input arg must be whole number greater than 0.");
+                throw new ArgumentException("Input arg must be whole number 0 or greater.");
             }
+
+            if(input == 0) { return 1; }
 
             int product = input;
             while (input > 1)
