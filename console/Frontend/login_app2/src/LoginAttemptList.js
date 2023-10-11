@@ -8,7 +8,7 @@ const LoginAttemptList = (props) => (
 	 	<p>Recent activity</p>
 	  	<input type="input" placeholder="Filter..." />
 		<ul className="Attempt-List">
-			{props.attempts.map(item => <LoginAttempt>{item.login} with pwd {item.pwd}</LoginAttempt>)}
+			<LoginAttempt>{JSON.stringify(props.attempts)}</LoginAttempt>
 		</ul>
 	</div>
 );

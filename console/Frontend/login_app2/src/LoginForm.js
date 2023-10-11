@@ -8,9 +8,12 @@ const LoginForm = (props) => {
 		//can use plain old js to get form fields and the values
 		//document.forms[0][""]  or something
 
+		const u = "admin";
+		const p = "P@ssw0rd";
+
 		props.onSubmit({
-			login: undefined,
-			password: undefined,
+			username: u,
+			password: p
 		});
 	}
 
