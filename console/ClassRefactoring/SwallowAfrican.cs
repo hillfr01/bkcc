@@ -10,7 +10,11 @@ namespace DeveloperSample.ClassRefactoring
     {
         public SwallowAfrican()
         {
-            AirspeedLoadMap.TryAdd(SwallowLoad.None, 22);
+            if(!AirspeedLoadMap.TryAdd(SwallowLoad.None, 22))
+            {
+                throw new InvalidOperationException("Fatal error consturcting African Swallow.  Could not add entry to AirspeedLoadMap with the default value of SwallowLoad.None.");
+            }
+            
             AirspeedLoadMap.TryAdd(SwallowLoad.Coconut, 18);
         }
 
@@ -18,19 +22,12 @@ namespace DeveloperSample.ClassRefactoring
 
         public override double GetAirspeedVelocity()
         {
-            if (this.Load == SwallowLoad.None)
+            if (!AirspeedLoadMap.TryGetValue(this.Load, out double outAirspeed))
             {
-                return AirspeedLoadMap[SwallowLoad.None];
+                //should not happen since load is enum
+                throw new ArgumentOutOfRangeException($"Cannot find airspeed for load {this.Load}.");
             }
-            else
-            {
-                if (!AirspeedLoadMap.TryGetValue(this.Load, out double outAirspeed))
-                {
-                    //should not happen since load is enum
-                    throw new ArgumentOutOfRangeException($"Cannot find airspeed for load {this.Load}.");
-                }
-                return outAirspeed;
-            }            
+            return outAirspeed;
         }
     }
 }
