@@ -21,6 +21,27 @@ namespace DeveloperSample.Syncing
             return list;
         }
 
+        public List<string> InitNonConncurrentListParallel(IEnumerable<string> items)
+        {
+            var list = new List<string>();
+            foreach (var item in items)
+            {
+                list.Add(item);
+            }
+            return list;
+        }
+
+        public List<string> InitNonConncurrentListParallelNo(IEnumerable<string> items)
+        {
+            var bag = new ConcurrentBag<string>();
+            Parallel.ForEach(items, i =>
+            {
+                bag.Add(i);
+            });
+            var list = bag.ToList();
+            return list;
+        }
+
         public List<string> InitializeListUsingTasks(IEnumerable<string> items)
         {
             var bag = new ConcurrentBag<string>();
